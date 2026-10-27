@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2 Engineering Chemistry: Ultimate Arcade Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 30px -5px rgba(14, 165, 233, 0.35);
+        }
+        .glow-amber {
+            box-shadow: 0 0 30px -5px rgba(245, 158, 11, 0.35);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.35);
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+        .animate-pulse-glow {
+            animation: pulseGlow 3s infinite;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #090d16; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-full flex flex-col selection:bg-sky-500 selection:text-white">
+
+    <header class="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchGame('hub')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 via-indigo-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-sky-500/20">
+                    <i class="fa-solid fa-bolt-lightning text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-sm sm:text-base bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400 bg-clip-text text-transparent">CHEM-ARCADE // Unit 2</h1>
+                    <p class="text-[10px] text-slate-400 tracking-wide">Battery Tech, Solar PV & Capacitors</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <div class="hidden md:flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60 text-xs font-mono">
+                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="text-slate-300">CORE ONLINE</span>
+                </div>
+                <div class="flex items-center bg-slate-800/90 px-3.5 py-1.5 rounded-lg border border-slate-700 space-x-2">
+                    <i class="fa-solid fa-trophy text-amber-400"></i>
+                    <span class="text-xs font-semibold text-slate-300">Total XP: <strong id="global-score" class="text-white text-sm">0</strong></span>
+                </div>
+                <div class="flex items-center bg-slate-800/90 px-3.5 py-1.5 rounded-lg border border-slate-700 space-x-2 font-mono">
+                    <i class="fa-solid fa-stopwatch text-sky-400"></i>
+                    <span id="timer-display" class="text-xs font-bold text-white">00:00</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
+        
+        <div id="view-hub" class="space-y-8">
+            <div class="glass-panel rounded-3xl p-8 sm:p-10 relative overflow-hidden border border-sky-500/30 glow-cyan">
+                <div class="absolute -right-10 -bottom-10 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-10 -top-10 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <span class="px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 font-mono text-xs font-semibold uppercase tracking-widest">Engineering Chemistry Game Suite</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Master Unit 2 Through Interactive Arcade Challenges</h2>
+                    <p class="text-sm sm:text-base text-slate-300 leading-relaxed">Choose an arcade module below to test your knowledge of electrochemical cells, solar photovoltaic materials, and supercapacitor energy storage.</p>
+                </div>
+            </div>
+
+            <!-- Game Selection Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Game 1 Card -->
+                <div class="glass-panel p-6 rounded-3xl relative overflow-hidden group hover:border-sky-500 transition-all duration-300 flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl group-hover:bg-sky-500/20 transition-all"></div>
+                    <div class="space-y-4 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/30 text-sky-400 flex items-center justify-center text-2xl shadow-lg">
+                            <i class="fa-solid fa-puzzle-piece"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Battery & Solar Matchmaker</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">Pair core chemical terminology like Anode, Cathode, P-N Junction, Monocrystalline Silicon, and EDLC Ultracapacitor with their exact definitions.</p>
+                    </div>
+                    <div class="pt-6 relative z-10">
+                        <button onclick="switchGame('matchmaker')" class="w-full py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-sky-600/30 text-sm flex items-center justify-center space-x-2">
+                            <span>Play Matchmaker</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Game 2 Card -->
+                <div class="glass-panel p-6 rounded-3xl relative overflow-hidden group hover:border-amber-500 transition-all duration-300 flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
+                    <div class="space-y-4 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center text-2xl shadow-lg">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Electrochemical Cell Builder</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">Assemble Lead-Acid and Lithium-Ion battery components in proper sequence, connect electrolytes, and test voltage output without short-circuiting.</p>
+                    </div>
+                    <div class="pt-6 relative z-10">
+                        <button onclick="switchGame('builder')" class="w-full py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-amber-600/30 text-sm flex items-center justify-center space-x-2">
+                            <span>Build Cell</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Game 3 Card -->
+                <div class="glass-panel p-6 rounded-3xl relative overflow-hidden group hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
+                    <div class="space-y-4 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-2xl shadow-lg">
+                            <i class="fa-solid fa-city"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Circuit Tycoon Quiz</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">Answer rapid-fire engineering chemistry trivia to charge up your virtual facility, unlock advanced power grids, and maximize energy efficiency.</p>
+                    </div>
+                    <div class="pt-6 relative z-10">
+                        <button onclick="switchGame('tycoon')" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-emerald-600/30 text-sm flex items-center justify-center space-x-2">
+                            <span>Start Tycoon</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-matchmaker" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass-panel p-6 rounded-2xl">
+                <div>
+                    <button onclick="switchGame('hub')" class="text-xs text-sky-400 hover:text-sky-300 mb-2 flex items-center space-x-1 font-mono">
+                        <i class="fa-solid fa-arrow-left"></i> <span>Back to Arcade Hub</span>
+                    </button>
+                    <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-puzzle-piece text-sky-400"></i>
+                        <span>Battery & Solar Matchmaker Puzzle</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">Click a term on the left, then click its corresponding definition on the right.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="text-xs font-mono bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+                        Pairs Matched: <span id="match-count" class="text-sky-400 font-bold">0</span> / <span id="match-total">6</span>
+                    </div>
+                    <button onclick="initMatchmaker()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg text-xs font-medium border border-slate-700 transition-all flex items-center space-x-1.5">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Reset</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Terms Column -->
+                <div class="space-y-3">
+                    <h3 class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold px-2">Lab Terminology</h3>
+                    <div id="terms-container" class="space-y-3"></div>
+                </div>
+                <!-- Definitions Column -->
+                <div class="space-y-3">
+                    <h3 class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-bold px-2">Definitions & Descriptions</h3>
+                    <div id="definitions-container" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <div id="match-feedback" class="hidden glass-panel p-4 rounded-xl border border-sky-500/30 bg-sky-950/20 text-sm text-sky-200 flex items-center space-x-3">
+                <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+                <div id="match-feedback-text">Correct match established!</div>
+            </div>
+        </div>
+
+        <div id="view-builder" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass-panel p-6 rounded-2xl">
+                <div>
+                    <button onclick="switchGame('hub')" class="text-xs text-amber-400 hover:text-amber-300 mb-2 flex items-center space-x-1 font-mono">
+                        <i class="fa-solid fa-arrow-left"></i> <span>Back to Arcade Hub</span>
+                    </button>
+                    <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-microchip text-amber-400"></i>
+                        <span>Electrochemical Cell Builder</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">Select the correct battery type and drag/click components into the assembly chamber in correct sequence.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <select id="builder-type-select" onchange="changeCellType()" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white font-semibold">
+                        <option value="leadacid">Lead-Acid Storage Battery</option>
+                        <option value="liion">Lithium-Ion Battery</option>
+                    </select>
+                    <button onclick="initBuilder()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg text-xs font-medium border border-slate-700 transition-all flex items-center space-x-1.5">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Reset Assembly</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Component Inventory -->
+                <div class="glass-panel p-5 rounded-2xl space-y-4">
+                    <h3 class="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold">Available Components</h3>
+                    <p class="text-xs text-slate-400">Click components in chronological order to assemble the electrochemical cell:</p>
+                    <div id="inventory-container" class="space-y-3"></div>
+                </div>
+
+                <!-- Assembly Chamber -->
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between space-y-6 lg:col-span-2 relative overflow-hidden border border-amber-500/20">
+                    <div class="absolute inset-0 bg-gradient-to-br from-amber-950/10 via-transparent to-transparent pointer-events-none"></div>
+                    <div class="space-y-2 relative z-10">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Cell Assembly Status</span>
+                            <span id="assembly-status-badge" class="px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 text-xs font-mono font-bold">INCOMPLETE</span>
+                        </div>
+                        <h3 id="cell-title-display" class="text-lg font-bold text-white">Lead-Acid Cell Assembly</h3>
+                    </div>
+
+                    <!-- Slots Container -->
+                    <div id="assembly-slots" class="grid grid-cols-1 sm:grid-cols-3 gap-4 relative z-10">
+                        <!-- Slots injected dynamically -->
+                    </div>
+
+                    <!-- Result Panel -->
+                    <div id="builder-result-box" class="hidden p-4 rounded-xl bg-slate-900/90 border border-slate-700 space-y-2 relative z-10">
+                        <div id="builder-result-title" class="text-sm font-bold text-emerald-400 flex items-center space-x-2">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Cell Successfully Energized!</span>
+                        </div>
+                        <p id="builder-result-desc" class="text-xs text-slate-300 leading-relaxed"></p>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-800 relative z-10">
+                        <div class="text-xs font-mono text-slate-400">
+                            Voltage Output: <span id="voltage-output" class="text-white font-bold">0.0 V</span>
+                        </div>
+                        <button id="test-cell-btn" onclick="testCellAssembly()" disabled class="px-6 py-2.5 bg-slate-800 text-slate-500 font-semibold rounded-xl text-sm transition-all flex items-center space-x-2 cursor-not-allowed">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>Test Cell Output</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-tycoon" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass-panel p-6 rounded-2xl">
+                <div>
+                    <button onclick="switchGame('hub')" class="text-xs text-emerald-400 hover:text-emerald-300 mb-2 flex items-center space-x-1 font-mono">
+                        <i class="fa-solid fa-arrow-left"></i> <span>Back to Arcade Hub</span>
+                    </button>
+                    <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-city text-emerald-400"></i>
+                        <span>Solar & Capacitor Circuit Tycoon</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">Answer rapid-fire engineering chemistry questions to supply power watts to your virtual microgrid facility!</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-xs font-mono bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+                        Facility Power: <span id="tycoon-watts" class="text-emerald-400 font-bold">0 kW</span>
+                    </div>
+                    <div class="text-xs font-mono bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+                        Level: <span id="tycoon-level" class="text-amber-400 font-bold">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facility Grid & Question Arena -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Facility Visualizer -->
+                <div class="glass-panel p-6 rounded-2xl space-y-6 border border-emerald-500/20 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">Microgrid Status</h3>
+                            <span id="facility-status" class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-mono">GENERATING</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                                <i class="fa-solid fa-solar-panel text-amber-400 text-xl mb-1"></i>
+                                <div class="text-[10px] text-slate-400">Solar Array</div>
+                                <div id="facility-solar" class="text-xs font-bold text-white">Offline</div>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                                <i class="fa-solid fa-battery-full text-sky-400 text-xl mb-1"></i>
+                                <div class="text-[10px] text-slate-400">Storage Bank</div>
+                                <div id="facility-storage" class="text-xs font-bold text-white">Offline</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between text-xs font-mono">
+                            <span class="text-slate-400">Grid Efficiency</span>
+                            <span id="grid-efficiency" class="text-emerald-400 font-bold">0%</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                            <div id="efficiency-bar" class="h-full bg-emerald-500 transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="text-center text-[11px] text-slate-500 font-mono">
+                        Correct answers upgrade facility capacity!
+                    </div>
+                </div>
+
+                <!-- Trivia Arena -->
+                <div class="glass-panel p-6 sm:p-8 rounded-2xl space-y-6 lg:col-span-2 border border-slate-800">
+                    <div class="flex items-center justify-between">
+                        <span id="tycoon-q-badge" class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                            Question 1 of 6
+                        </span>
+                        <span id="tycoon-streak-badge" class="text-xs font-mono text-slate-400">Streak: <strong class="text-white">0</strong></span>
+                    </div>
+
+                    <h3 id="tycoon-q-text" class="text-lg sm:text-xl font-semibold text-white leading-relaxed">
+                        Loading question...
+                    </h3>
+
+                    <div id="tycoon-options" class="grid grid-cols-1 gap-3">
+                        <!-- Options injected dynamically -->
+                    </div>
+
+                    <div id="tycoon-expl-box" class="hidden p-4 rounded-xl bg-slate-900/90 border border-slate-700 space-y-2">
+                        <div class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center space-x-2">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Engineering Explanation</span>
+                        </div>
+                        <p id="tycoon-expl-text" class="text-xs sm:text-sm text-slate-300 leading-relaxed"></p>
+                    </div>
+
+                    <div class="flex justify-end pt-4 border-t border-slate-800">
+                        <button id="tycoon-next-btn" onclick="nextTycoonQuestion()" class="hidden px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-emerald-600/30 flex items-center space-x-2">
+                            <span>Next Challenge</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completion Modal -->
+        <div id="completion-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
+            <div class="glass-panel max-w-md w-full p-8 rounded-3xl border border-sky-500/40 text-center space-y-6 glow-cyan">
+                <div class="w-20 h-20 bg-gradient-to-tr from-amber-400 to-amber-600 rounded-full flex items-center justify-center mx-auto shadow-xl shadow-amber-500/30">
+                    <i class="fa-solid fa-award text-white text-3xl"></i>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="text-2xl font-extrabold text-white">Mission Accomplished!</h3>
+                    <p class="text-xs text-slate-300">You have successfully dominated the Unit 2 Engineering Chemistry arcade suite.</p>
+                </div>
+                <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 flex justify-around font-mono text-xs">
+                    <div>
+                        <div class="text-slate-400">Total XP Earned</div>
+                        <div id="modal-final-score" class="text-xl font-bold text-sky-400 mt-1">0</div>
+                    </div>
+                    <div>
+                        <div class="text-slate-400">Total Time</div>
+                        <div id="modal-final-time" class="text-xl font-bold text-amber-400 mt-1">00:00</div>
+                    </div>
+                </div>
+                <button onclick="closeCompletionModal()" class="w-full py-3 bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg transition-all text-sm">
+                    Return to Arcade Hub
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900/60 border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+        Unit 2 Engineering Chemistry Interactive Arcade Suite &copy; 2026
+    </footer>
+
+    <script>
+        let globalScore = 0;
+        let secondsElapsed = 0;
+        let timerInterval = null;
+        let activeGame = 'hub';
+
+        // --- GAME 1: MATCHMAKER DATA ---
+        const matchPairs = [
+            { id: 1, term: "Lead-Acid Anode", definition: "Sponge lead (Pb) electrode that undergoes oxidation during discharge." },
+            { id: 2, term: "P-N Junction", definition: "Semiconductor interface where sunlight generates electron-hole pairs in solar cells." },
+            { id: 3, term: "Monocrystalline Solar", definition: "Solar cell cut from a single continuous silicon crystal ingot with highest efficiency." },
+            { id: 4, term: "EDLC Ultracapacitor", definition: "Electrostatic energy storage device utilizing ion adsorption at the electrode-electrolyte interface." },
+            { id: 5, term: "Lithium-Ion Cathode", definition: "Lithium metal oxide (e.g., LiCoO2) electrode responsible for intercalation during discharge." },
+            { id: 6, term: "Secondary Battery", definition: "Rechargeable electrochemical cell allowing reversible reactions via external charging." }
+        ];
+        let selectedTermId = null;
+        let matchedPairsCount = 0;
+
+        // --- GAME 2: BUILDER DATA ---
+        const cellDataSets = {
+            leadacid: {
+                title: "Lead-Acid Storage Battery",
+                components: [
+                    { id: 'anode', name: "Sponge Lead Anode (Pb)", type: 'anode', correctSlot: 0 },
+                    { id: 'electrolyte', name: "Sulfuric Acid Electrolyte (H2SO4)", type: 'electrolyte', correctSlot: 1 },
+                    { id: 'cathode', name: "Lead Dioxide Cathode (PbO2)", type: 'cathode', correctSlot: 2 }
+                ],
+                voltage: "12.0 V (6 Cells in Series)",
+                desc: "Lead-acid battery successfully assembled! Sponge lead and lead dioxide react with sulfuric acid to produce lead sulfate and electrical energy."
+            },
+            liion: {
+                title: "Lithium-Ion Battery",
+                components: [
+                    { id: 'anode', name: "Graphite Anode (Li intercalation)", type: 'anode', correctSlot: 0 },
+                    { id: 'electrolyte', name: "Non-Aqueous Organic Salt Electrolyte", type: 'electrolyte', correctSlot: 1 },
+                    { id: 'cathode', name: "Lithium Cobalt Oxide Cathode (LiCoO2)", type: 'cathode', correctSlot: 2 }
+                ],
+                voltage: "3.7 V (Single Cell nominal)",
+                desc: "Lithium-ion cell successfully assembled! Lithium ions shuttle between graphite anode and metal oxide cathode through the non-aqueous electrolyte."
+            }
+        };
+        let currentCellType = 'leadacid';
+        let placedComponents = [null, null, null];
+        let availableBuilderItems = [];
+
+        // --- GAME 3: TYCOON TRIVIA DATA ---
+        const tycoonQuestions = [
+            {
+                question: "What is the primary role of the sulfuric acid electrolyte in a lead-acid storage battery?",
+                options: [
+                    "To act as a thermal coolant preventing explosion.",
+                    "To supply sulfate ions and facilitate ionic conduction between electrodes during redox reactions.",
+                    "To provide permanent structural rigidity to the outer plastic casing.",
+                    "To absorb stray electrons and prevent self-discharge."
+                ],
+                correct: 1,
+                explanation: "Sulfuric acid provides the hydrogen and sulfate ions required to complete the internal circuit and drive the discharge reaction forming lead sulfate."
+            },
+            {
+                question: "Why do monocrystalline silicon solar cells exhibit higher energy conversion efficiency than polycrystalline cells?",
+                options: [
+                    "They are manufactured using toxic cadmium telluride compounds.",
+                    "Their single continuous crystal lattice minimizes electron scattering and recombination defects.",
+                    "They operate only under ultraviolet radiation.",
+                    "They incorporate built-in ultracapacitors for surge storage."
+                ],
+                correct: 1,
+                explanation: "A single uninterrupted silicon crystal structure allows photogenerated electrons to travel with fewer grain boundary obstructions, boosting efficiency."
+            },
+            {
+                question: "How do EDLC Ultracapacitors store electrical energy compared to traditional faradaic batteries?",
+                options: [
+                    "By physical electrostatic ion adsorption at the electrode-electrolyte interface without chemical bonds breaking.",
+                    "By permanent chemical oxidation of lithium metal.",
+                    "By magnetic induction inside copper wire coils.",
+                    "By thermal emission of electrons at high temperatures."
+                ],
+                correct: 0,
+                explanation: "EDLCs store charge electrostatically in an electric double layer, enabling lightning-fast charge/discharge rates and near-infinite cycle life."
+            },
+            {
+                question: "What happens to the electrolyte concentration (density) of a lead-acid battery as it undergoes complete discharge?",
+                options: [
+                    "Concentration increases significantly as pure acid is generated.",
+                    "Concentration decreases because sulfuric acid is consumed to form lead sulfate.",
+                    "Concentration remains perfectly constant.",
+                    "Electrolyte turns entirely into gaseous hydrogen."
+                ],
+                correct: 1,
+                explanation: "Sulfuric acid is consumed during discharge to form solid lead sulfate on both plates, causing the specific gravity of the electrolyte to drop."
+            },
+            {
+                question: "Which material is most commonly paired as a high-performance cathode in rechargeable lithium-ion batteries?",
+                options: [
+                    "Zinc Metal Foil",
+                    "Lithium Cobalt Oxide (LiCoO2) or Lithium Iron Phosphate",
+                    "Lead Dioxide Paste",
+                    "Pure Carbon Black"
+                ],
+                correct: 1,
+                explanation: "Lithium transition metal oxides like LiCoO2 provide high intercalation capacity and stable voltage plateaus for portable and EV applications."
+            },
+            {
+                question: "What is a major limitation of ultracapacitors when compared against chemical batteries?",
+                options: [
+                    "Extremely short cycle life and poor power density.",
+                    "Lower total energy storage density (energy per unit weight).",
+                    "Inability to operate at room temperature.",
+                    "High risk of spontaneous acid leakage."
+                ],
+                correct: 1,
+                explanation: "While ultracapacitors offer exceptional power density, their energy density is lower than chemical batteries because electrostatic surface adsorption stores less total energy than bulk chemical redox reactions."
+            }
+        ];
+        let tycoonIndex = 0;
+        let tycoonStreak = 0;
+        let tycoonPower = 0;
+
+        window.onload = function() {
+            startTimer();
+            initMatchmaker();
+            initBuilder();
+            initTycoon();
+        };
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                secondsElapsed++;
+                const mins = Math.floor(secondsElapsed / 60).toString().padStart(2, '0');
+                const secs = (secondsElapsed % 60).toString().padStart(2, '0');
+                document.getElementById('timer-display').innerText = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function switchGame(gameId) {
+            activeGame = gameId;
+            const views = ['hub', 'matchmaker', 'builder', 'tycoon'];
+            views.forEach(v => {
+                const elem = document.getElementById(`view-${v}`);
+                if (v === gameId) {
+                    elem.classList.remove('hidden');
+                } else {
+                    elem.classList.add('hidden');
+                }
+            });
+        }
+
+        function addScore(pts) {
+            globalScore += pts;
+            document.getElementById('global-score').innerText = globalScore;
+        }
+
+        // --- MATCHMAKER GAME LOGIC ---
+        function initMatchmaker() {
+            matchedPairsCount = 0;
+            selectedTermId = null;
+            document.getElementById('match-count').innerText = '0';
+            document.getElementById('match-total').innerText = matchPairs.length;
+            document.getElementById('match-feedback').classList.add('hidden');
+
+            const termsContainer = document.getElementById('terms-container');
+            const defsContainer = document.getElementById('definitions-container');
+            termsContainer.innerHTML = '';
+            defsContainer.innerHTML = '';
+
+            const shuffledTerms = [...matchPairs].sort(() => Math.random() - 0.5);
+            const shuffledDefs = [...matchPairs].sort(() => Math.random() - 0.5);
+
+            shuffledTerms.forEach(item => {
+                const btn = document.createElement('button');
+                btn.id = `term-${item.id}`;
+                btn.className = "w-full text-left p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-sky-500/50 text-slate-200 font-semibold text-sm transition-all flex items-center justify-between group";
+                btn.innerHTML = `<span>${item.term}</span> <i class="fa-solid fa-grip-vertical text-slate-600 group-hover:text-sky-400"></i>`;
+                btn.onclick = () => selectTerm(item.id);
+                termsContainer.appendChild(btn);
+            });
+
+            shuffledDefs.forEach(item => {
+                const btn = document.createElement('button');
+                btn.id = `def-${item.id}`;
+                btn.className = "w-full text-left p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 text-slate-300 text-xs sm:text-sm transition-all";
+                btn.innerText = item.definition;
+                btn.onclick = () => selectDefinition(item.id);
+                defsContainer.appendChild(btn);
+            });
+        }
+
+        function selectTerm(id) {
+            const termBtn = document.getElementById(`term-${id}`);
+            if (termBtn.classList.contains('bg-emerald-950/40')) return;
+
+            matchPairs.forEach(item => {
+                const tBtn = document.getElementById(`term-${item.id}`);
+                if (!tBtn.classList.contains('bg-emerald-950/40')) {
+                    tBtn.className = "w-full text-left p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-sky-500/50 text-slate-200 font-semibold text-sm transition-all flex items-center justify-between group";
+                }
+            });
+
+            selectedTermId = id;
+            termBtn.className = "w-full text-left p-4 rounded-xl bg-sky-950/60 border-2 border-sky-500 text-white font-semibold text-sm transition-all flex items-center justify-between group shadow-lg shadow-sky-500/20";
+        }
+
+        function selectDefinition(id) {
+            if (!selectedTermId) {
+                showMatchFeedback("Please select a lab term on the left first!", false);
+                return;
+            }
+            const defBtn = document.getElementById(`def-${id}`);
+            if (defBtn.classList.contains('bg-emerald-950/40')) return;
+
+            if (selectedTermId === id) {
+                const tBtn = document.getElementById(`term-${selectedTermId}`);
+                tBtn.className = "w-full text-left p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/50 text-emerald-200 font-semibold text-sm flex items-center justify-between opacity-80 cursor-default";
+                defBtn.className = "w-full text-left p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/50 text-emerald-200 text-xs sm:text-sm opacity-80 cursor-default";
+                tBtn.onclick = null;
+                defBtn.onclick = null;
+
+                matchedPairsCount++;
+                document.getElementById('match-count').innerText = matchedPairsCount;
+                addScore(25);
+
+                showMatchFeedback(`Correct match established! Successfully linked "${getTermName(selectedTermId)}".`, true);
+                selectedTermId = null;
+
+                if (matchedPairsCount === matchPairs.length) {
+                    setTimeout(() => checkGameCompletion(), 600);
+                }
+            } else {
+                showMatchFeedback("Incorrect match! Try a different definition.", false);
+                const tBtn = document.getElementById(`term-${selectedTermId}`);
+                tBtn.classList.add('border-rose-500');
+                setTimeout(() => tBtn.classList.remove('border-rose-500'), 600);
+            }
+        }
+
+        function getTermName(id) {
+            const found = matchPairs.find(p => p.id === id);
+            return found ? found.term : "";
+        }
+
+        function showMatchFeedback(text, isSuccess) {
+            const box = document.getElementById('match-feedback');
+            const txt = document.getElementById('match-feedback-text');
+            box.classList.remove('hidden');
+            txt.innerText = text;
+            if (isSuccess) {
+                box.className = "glass-panel p-4 rounded-xl border border-emerald-500/30 bg-emerald-950/20 text-sm text-emerald-200 flex items-center space-x-3";
+            } else {
+                box.className = "glass-panel p-4 rounded-xl border border-rose-500/30 bg-rose-950/20 text-sm text-rose-200 flex items-center space-x-3";
+            }
+        }
+
+        // --- GAME 2: ELECTROCHEMICAL CELL BUILDER LOGIC ---
+        function changeCellType() {
+            currentCellType = document.getElementById('builder-type-select').value;
+            initBuilder();
+        }
+
+        function initBuilder() {
+            const data = cellDataSets[currentCellType];
+            document.getElementById('cell-title-display').innerText = data.title;
+            document.getElementById('assembly-status-badge').innerText = "INCOMPLETE";
+            document.getElementById('assembly-status-badge').className = "px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 text-xs font-mono font-bold";
+            document.getElementById('builder-result-box').classList.add('hidden');
+            document.getElementById('voltage-output').innerText = "0.0 V";
+            
+            const testBtn = document.getElementById('test-cell-btn');
+            testBtn.disabled = true;
+            testBtn.className = "px-6 py-2.5 bg-slate-800 text-slate-500 font-semibold rounded-xl text-sm transition-all flex items-center space-x-2 cursor-not-allowed";
+
+            placedComponents = [null, null, null];
+            availableBuilderItems = [...data.components].sort(() => Math.random() - 0.5);
+
+            renderBuilderInventory();
+            renderBuilderSlots();
+        }
+
+        function renderBuilderInventory() {
+            const invContainer = document.getElementById('inventory-container');
+            invContainer.innerHTML = '';
+            
+            availableBuilderItems.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-amber-500/50 text-slate-200 text-xs font-medium transition-all flex items-center justify-between group";
+                btn.innerHTML = `<span>${item.name}</span> <i class="fa-solid fa-plus text-slate-600 group-hover:text-amber-400"></i>`;
+                btn.onclick = () => placeComponentInNextSlot(item);
+                invContainer.appendChild(btn);
+            });
+        }
+
+        function renderBuilderSlots() {
+            const slotsContainer = document.getElementById('assembly-slots');
+            slotsContainer.innerHTML = '';
+
+            const slotLabels = ["1. Anode (-) Electrode", "2. Liquid/Gel Electrolyte", "3. Cathode (+) Electrode"];
+
+            for (let i = 0; i < 3; i++) {
+                const slotDiv = document.createElement('div');
+                slotDiv.className = "p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between space-y-3 min-h-[110px]";
+                
+                const placed = placedComponents[i];
+                if (placed) {
+                    slotDiv.className = "p-4 rounded-xl bg-amber-950/30 border border-amber-500/50 flex flex-col justify-between space-y-3 min-h-[110px]";
+                    slotDiv.innerHTML = `
+                        <div class="flex items-center justify-between text-[10px] font-mono text-amber-400">
+                            <span>SLOT ${i+1}</span>
+                            <button onclick="removeComponent(${i})" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div class="text-xs font-bold text-white">${placed.name}</div>
+                    `;
+                } else {
+                    slotDiv.innerHTML = `
+                        <div class="text-[10px] font-mono text-slate-500">SLOT ${i+1}</div>
+                        <div class="text-xs text-slate-400 italic">${slotLabels[i]}</div>
+                    `;
+                }
+                slotsContainer.appendChild(slotDiv);
+            }
+
+            // Check if all slots filled
+            if (placedComponents.every(p => p !== null)) {
+                const testBtn = document.getElementById('test-cell-btn');
+                testBtn.disabled = false;
+                testBtn.className = "px-6 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-amber-600/30 flex items-center space-x-2";
+            }
+        }
+
+        function placeComponentInNextSlot(item) {
+            const emptyIdx = placedComponents.findIndex(p => p === null);
+            if (emptyIdx === -1) return;
+
+            placedComponents[emptyIdx] = item;
+            availableBuilderItems = availableBuilderItems.filter(i => i.id !== item.id);
+            renderBuilderInventory();
+            renderBuilderSlots();
+        }
+
+        function removeComponent(index) {
+            const removed = placedComponents[index];
+            if (!removed) return;
+
+            placedComponents[index] = null;
+            availableBuilderItems.push(removed);
+            renderBuilderInventory();
+            renderBuilderSlots();
+
+            const testBtn = document.getElementById('test-cell-btn');
+            testBtn.disabled = true;
+            testBtn.className = "px-6 py-2.5 bg-slate-800 text-slate-500 font-semibold rounded-xl text-sm transition-all flex items-center space-x-2 cursor-not-allowed";
+        }
+
+        function testCellAssembly() {
+            const data = cellDataSets[currentCellType];
+            let isCorrect = true;
+
+            for (let i = 0; i < 3; i++) {
+                if (!placedComponents[i] || placedComponents[i].correctSlot !== i) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+
+            const badge = document.getElementById('assembly-status-badge');
+            const resBox = document.getElementById('builder-result-box');
+            const resDesc = document.getElementById('builder-result-desc');
+
+            resBox.classList.remove('hidden');
+
+            if (isCorrect) {
+                badge.innerText = "ENERGIZED";
+                badge.className = "px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 text-xs font-mono font-bold";
+                document.getElementById('voltage-output').innerText = data.voltage;
+                resDesc.innerText = data.desc;
+                addScore(50);
+                setTimeout(() => checkGameCompletion(), 800);
+            } else {
+                badge.innerText = "SHORT-CIRCUITED";
+                badge.className = "px-2.5 py-1 rounded bg-rose-500/10 text-rose-400 text-xs font-mono font-bold";
+                document.getElementById('voltage-output').innerText = "0.0 V (Fault)";
+                resDesc.innerText = "Incorrect component sequence! Ensure Anode is placed in Slot 1, Electrolyte in Slot 2, and Cathode in Slot 3 to prevent internal short circuits.";
+            }
+        }
+
+        // --- GAME 3: CIRCUIT TYCOON QUIZ LOGIC ---
+        function initTycoon() {
+            tycoonIndex = 0;
+            tycoonStreak = 0;
+            tycoonPower = 0;
+            loadTycoonQuestion();
+        }
+
+        function loadTycoonQuestion() {
+            if (tycoonIndex >= tycoonQuestions.length) {
+                tycoonIndex = 0; // Loop or finish
+            }
+            const q = tycoonQuestions[tycoonIndex];
+            document.getElementById('tycoon-q-badge').innerText = `Question ${tycoonIndex + 1} of ${tycoonQuestions.length}`;
+            document.getElementById('tycoon-q-text').innerText = q.question;
+            document.getElementById('tycoon-streak-badge').innerHTML = `Streak: <strong class="text-white">${tycoonStreak}</strong>`;
+            document.getElementById('tycoon-expl-box').classList.add('hidden');
+            document.getElementById('tycoon-next-btn').classList.add('hidden');
+
+            const optionsContainer = document.getElementById('tycoon-options');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 text-slate-200 text-sm transition-all flex items-center space-x-3 group";
+                btn.innerHTML = `<span class="w-7 h-7 rounded-lg bg-slate-800 text-slate-400 group-hover:bg-emerald-500 group-hover:text-slate-950 flex items-center justify-center font-mono text-xs font-bold transition-all">${String.fromCharCode(65 + idx)}</span> <span class="flex-grow">${opt}</span>`;
+                btn.onclick = () => selectTycoonOption(idx);
+                btn.id = `tycoon-opt-${idx}`;
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectTycoonOption(selectedIndex) {
+            const q = tycoonQuestions[tycoonIndex];
+            const correctIndex = q.correct;
+
+            for (let i = 0; i < q.options.length; i++) {
+                const btn = document.getElementById(`tycoon-opt-${i}`);
+                btn.onclick = null;
+                if (i === correctIndex) {
+                    btn.className = "w-full text-left p-4 rounded-xl bg-emerald-950/50 border border-emerald-500 text-emerald-200 text-sm flex items-center space-x-3";
+                } else if (i === selectedIndex) {
+                    btn.className = "w-full text-left p-4 rounded-xl bg-rose-950/50 border border-rose-500 text-rose-200 text-sm flex items-center space-x-3";
+                } else {
+                    btn.className = "w-full text-left p-4 rounded-xl bg-slate-900/40 border border-slate-800 text-slate-500 text-sm flex items-center space-x-3 opacity-50";
+                }
+            }
+
+            if (selectedIndex === correctIndex) {
+                tycoonStreak++;
+                tycoonPower += 250;
+                addScore(40);
+            } else {
+                tycoonStreak = 0;
+            }
+
+            // Update facility metrics
+            document.getElementById('tycoon-watts').innerText = `${tycoonPower} kW`;
+            document.getElementById('facility-solar').innerText = "Active (98%)";
+            document.getElementById('facility-storage').innerText = "Optimal";
+            document.getElementById('grid-efficiency').innerText = `${Math.min(100, (tycoonIndex + 1) * 16)}%`;
+            document.getElementById('efficiency-bar').style.width = `${Math.min(100, (tycoonIndex + 1) * 16)}%`;
+
+            // Show explanation
+            document.getElementById('tycoon-expl-text').innerText = q.explanation;
+            document.getElementById('tycoon-expl-box').classList.remove('hidden');
+            document.getElementById('tycoon-next-btn').classList.remove('hidden');
+        }
+
+        function nextTycoonQuestion() {
+            tycoonIndex++;
+            if (tycoonIndex < tycoonQuestions.length) {
+                loadTycoonQuestion();
+            } else {
+                checkGameCompletion();
+            }
+        }
+
+        // --- COMPLETION MODAL ---
+        function checkGameCompletion() {
+            if (timerInterval) clearInterval(timerInterval);
+            const mins = Math.floor(secondsElapsed / 60).toString().padStart(2, '0');
+            const secs = (secondsElapsed % 60).toString().padStart(2, '0');
+
+            document.getElementById('modal-final-score').innerText = globalScore;
+            document.getElementById('modal-final-time').innerText = `${mins}:${secs}`;
+            document.getElementById('completion-modal').classList.remove('hidden');
+        }
+
+        function closeCompletionModal() {
+            document.getElementById('completion-modal').classList.add('hidden');
+            switchGame('hub');
+        }
+    </script>
+</body>
+</html>

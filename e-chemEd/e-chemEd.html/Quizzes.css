@@ -1,0 +1,197 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: rgb(2, 0, 3);
+    border-bottom: 2px solid #eaeaea;
+    padding: 10px 30px;
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-btn-wrapper {
+    padding: 8px 16px;
+    background-color: orangered;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.home-btn-wrapper a {
+    color: #fff;
+    font-weight: bold;
+}
+
+.home{
+    text-align: right;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    padding: 50px;
+    flex: 1;
+    background-color: rgb(224, 222, 225);
+    display: inline-block;
+}
+
+h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #000;
+    display: inline-block;
+}
+
+/* Grid Layout matching the reference image layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    justify-items: center;
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+}
+
+/* Card Styling matching the mockup rounded boxes */
+.quiz-card {
+    border: 3px solid #000;
+    border-radius: 20px;
+    width: 200px;
+    height: 140px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+}
+
+.quiz-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.quiz-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #000;
+}
+
+.quiz-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.3;
+    text-align: center;
+    color: #333;
+}
+
+/* Active Quiz Interface Styles */
+.hidden {
+    display: none !important;
+}
+
+#quiz-container {
+    background: #fff;
+    border: 2px solid #ccc;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#options-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.option-btn {
+    padding: 12px 15px;
+    border: 2px solid #000;
+    background-color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+    transition: background 0.2s;
+}
+
+.option-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.option-btn.correct {
+    background-color: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.option-btn.wrong {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+#next-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#next-btn:hover {
+    background-color: #333;
+}
+
+/* footer {
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+footer a {
+    color: #555;
+    font-weight: 500;
+}
+
+footer a:hover {
+    color: #000;
+    text-decoration: underline;
+} */
+ footer {
+  text-align: center;
+  padding: 20px;
+  background-color:rgb(1, 0, 2);
+  color: white;
+  font-size: 14px;
+  width: 100%;
+}

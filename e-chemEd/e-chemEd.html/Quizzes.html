@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes Dashboard</title>
+    <link rel="stylesheet" href="Quizzes.css">
+</head>
+
+<body>
+    <!--header (home)-->
+    <header>
+        <div class="header-wrapper">
+            <img src="E-chemEd1.jpeg" height="93px" alt="E-chemEd Logo">
+            <button class="home-btn-wrapper">
+                <a href="HomePage.html" class="button-link" style="text-decoration: none;">home</a>
+            </button>
+        </div>
+    </header>
+
+    <!-- Dashboard View -->
+    <div id="dashboard-container" class="container">
+        <h1>Let's Check your knowledge By Some Quizzes</h1>
+        <br>
+        <div class="grid-container">
+            <!-- Unit 1 -->
+            <a href="Water Processing And Environment Sustainability.html" style="text-decoration: none;">
+                <div class="quiz-card" onclick="startQuiz(1, 'Water Processing And Environment Sustainability')">
+                    <h3>UNIT :- 1</h3>
+                    <p>Water Processing<br>And Environment<br>Sustainability</p>
+                </div>
+            </a>
+
+            <!-- Unit 2 -->
+            <div class="quiz-card" onclick="startQuiz(2, 'Corrosion Protection Of Metals')">
+                <h3>UNIT :- 2</h3>
+                <p>Electrochemical<br>Energy<br>Storage<br>Systems</p> 
+            </div>
+
+            <!-- Unit 3 -->
+            <div class="quiz-card" onclick="startQuiz(3, 'Energy Generation')">
+                <h3>UNIT :- 3</h3>
+                <p>Flexible Electronics And<br>Optoelectronic Materials</p>
+            </div>
+
+            <!-- Unit 4 -->
+            <div class="quiz-card" onclick="startQuiz(4, 'Polymer & Composite')">
+                <h3>UNIT :- 4</h3>
+                <p>Nanomaterials,Electrochemistry &<br>Thermal Analysis</p>
+            </div>
+
+            <!-- Unit 5 -->
+            <div class="quiz-card" onclick="startQuiz(5, 'Electrochemical Power Sources')">
+                <h3>UNIT :- 5</h3>
+                <p>Energy Generation &<br>Sustainable Fuels</p>
+            </div>
+
+            
+    <!-- Active Quiz Interface Container -->
+    <div id="quiz-container" class="container hidden">
+        <h2 id="quiz-title"></h2>
+        <div id="question-box"></div>
+        <div id="options-box"></div>
+        <button id="next-btn" class="hidden">Next Question</button>
+    </div>
+<br>
+    <!-- <footer>
+        <a href="#" style="text-decoration: none;">About Us</a>
+        <a href="#" style="text-decoration: none;">Contact Us</a>
+    </footer> -->
+
+    <!-- <script src="Quizzes.js"></script> -->
+</body>
+</html>
