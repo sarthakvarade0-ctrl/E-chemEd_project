@@ -106,7 +106,7 @@ button{
 }
 #attendance{
     display: inline-block;
-    width: 300pxpx;
+    width: 300px;
     height: 300px;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
@@ -116,7 +116,7 @@ button{
 }
 #other{
     display: inline-block;
-    width: 300pxpx;
+    width: 300px;
     height: 300px;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
@@ -135,7 +135,7 @@ button{
     background-image: url(chinemam.jpg);
     background-size: cover;
     border: 2px,solid,black;
-    content-align: center;
+    margin: 0 auto;
     
 }
 
