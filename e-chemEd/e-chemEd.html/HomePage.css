@@ -7,13 +7,24 @@
 
 }
 header{
-    background-color: rgb(4, 0, 8);
+    
+    background-color: dodgerblue;
     position: fixed;
     width: 100%;
+    display: flex;
+    
+}
+.add-box{
+    text-align: center;
+    padding-top: 60px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 150px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0,0.9);
 }
 
 .logo{
-    height:60px;
+    height:70px;
     width:70px ;
     border-radius: 50%;
     background-image: url(logo.jpg);
@@ -26,11 +37,15 @@ header{
     padding: 20px;
 }
 .sitename{
-    background-image: url(sitename.jpg);
+    
     background-size: contain;
-    height: 60px;
-    width: 240px;
+    height: 50px;
+    font-size: 50px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: white;
+    font-family: arial rounded mt bold;
     display: inline-block;
+    vertical-align: top;
 }
 
 
@@ -46,10 +61,11 @@ header{
     
 }
 section{
-    background-color: #d2d3d4;
+    background-color: #d2d2d2;
     display: inline-block;
     padding: 20px;
-    border-radius: 10%;
+    width: 100%;
+    
    
 }
 h2{
@@ -61,7 +77,7 @@ h2{
 }
 #mindmapbody{
     display: inline-block;
-    width: 300pxpx;
+    width: 300px;
     height: 300px;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
@@ -92,7 +108,7 @@ button{
 }
 #attendance{
     display: inline-block;
-    width: 300pxpx;
+    width: 300px;
     height: 300px;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
@@ -102,7 +118,7 @@ button{
 }
 #other{
     display: inline-block;
-    width: 300pxpx;
+    width: 300px;
     height: 300px;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
@@ -121,6 +137,8 @@ button{
     background-image: url(chinemam.jpg);
     background-size: cover;
     border: 2px,solid,black;
+    margin: 0 auto;
+    
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------ */
