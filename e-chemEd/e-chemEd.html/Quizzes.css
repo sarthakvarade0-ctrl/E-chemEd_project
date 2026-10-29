@@ -38,7 +38,7 @@ header {
     font-weight: bold;
 }
 
-.home{
+.home {
     text-align: right;
 }
 
@@ -90,6 +90,34 @@ h1 {
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
 }
 
+/* Shift Unit 4 and 5 to the right */
+.grid-container>*:nth-child(4),
+.grid-container>*:nth-child(5) {
+    transform: translateX(75%);
+}
+
+.grid-container>*:nth-child(4):hover,
+.grid-container>*:nth-child(5):hover {
+    transform: translateX(75%) scale(1.05);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 850px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-container>*:nth-child(4),
+    .grid-container>*:nth-child(5) {
+        transform: none;
+    }
+
+    .grid-container>*:nth-child(4):hover,
+    .grid-container>*:nth-child(5):hover {
+        transform: scale(1.05);
+    }
+}
+
 .quiz-card h3 {
     margin: 0 0 10px 0;
     font-size: 16px;
@@ -116,7 +144,7 @@ h1 {
     margin: 30px auto;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 #options-box {
@@ -187,11 +215,11 @@ footer a:hover {
     color: #000;
     text-decoration: underline;
 } */
- footer {
-  text-align: center;
-  padding: 20px;
-  background-color:rgb(1, 0, 2);
-  color: white;
-  font-size: 14px;
-  width: 100%;
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(1, 0, 2);
+    color: white;
+    font-size: 14px;
+    width: 100%;
 }
