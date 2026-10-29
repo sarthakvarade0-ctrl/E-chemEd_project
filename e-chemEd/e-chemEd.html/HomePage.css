@@ -16,9 +16,11 @@ header{
 }
 .add-box{
     text-align: center;
-    padding: 10px 20px;
+    padding-top: 60px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     height: 150px;
-    border: 2px dashed #040101;
+    box-shadow: 0 4px 12px rgba(0, 0, 0,0.9);
 }
 
 .logo{
