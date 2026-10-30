@@ -1,0 +1,137 @@
+/* header */
+*{
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: border-box;
+    
+
+}
+header{
+    background-color: dodgerblue;
+    position: fixed;
+    width: 100%;
+}
+
+.logo{
+    height:60px;
+    width:70px ;
+    border-radius: 50%;
+    background-image: url(logo.jpg);
+    background-size: contain;
+    display: inline-block;
+}
+
+.navbar{
+    height: px;
+    padding: 20px;
+}
+.sitename{
+    background-image: url(sitename.jpg);
+    background-size: contain;
+    height: 60px;
+    width: 240px;
+    display: inline-block;
+}
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------- */
+
+
+/* section feature */
+
+#main{
+    background-color: #f6f6f7;
+    text-align: center;
+    
+}
+section{
+    background-color: white;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 10%;
+   
+}
+h2{
+    display: inline;
+
+}
+.text{
+    margin: 2px;
+}
+#mindmapbody{
+    display: inline-block;
+    width: 200px;
+    height: 250px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 1);
+    border: 2px,solid,rgb(252, 249, 249);
+    background:  white;
+    padding: 20px;
+
+}
+
+
+button{
+    height: 50PX;
+    width: 150PX;
+    margin-top: 20PX;
+    border-radius: 10%;
+    background-color: dodgerblue;
+    color: white;
+    box-shadow: 0, 2px, 6px, rgba(0, 0, 0, 1);
+    border: 2px,solid,rgb(76, 111, 249);
+}
+#quizzbody{
+    display: inline-block;
+    width: 200px;
+    height: 250px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 1);
+    border: 2px,solid,rgb(253, 248, 248);
+    background: white ;
+    padding: 20px;
+}
+#attendance{
+    display: inline-block;
+    width: 200px;
+    height: 250px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 1);
+    border: 2px,solid,rgb(253, 248, 248);
+    background: white;
+    padding: 20px;
+}
+#other{
+    display: inline-block;
+    width: 300pxpx;
+    height: 300px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
+    border: 2px,solid,black;
+    background: #CAF0F8;
+    padding: 20px;
+
+}
+/* ------------------------------------------------------------------------------------------- */
+
+/* section faculty */
+.photo{
+    background-color: beige;
+    width: 200px;
+    height: 250px;
+    background-image: url(chinemam.jpg);
+    background-size: cover;
+    border: 2px,solid,black;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------ */
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color:rgb(3, 0, 6);
+  color: white;
+  font-size: 14px;
+}
