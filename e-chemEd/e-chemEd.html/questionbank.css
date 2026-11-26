@@ -1,0 +1,252 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #f8f4f0;
+    color: #2d2238;
+    line-height: 1.65;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Header */
+header {
+    background: linear-gradient(135deg, #8e6fa9 0%, #a98cc3 100%);
+    border-bottom: 2px solid #7d5d9c;
+    padding: 14px 24px;
+    box-shadow: 0 4px 14px rgba(74, 52, 94, 0.18);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-wrapper {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-btn-link {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nav-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f8f4f0;
+    color: #4a345e;
+    border: 2px solid #5c4275;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgba(45, 34, 56, 0.15);
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: #ffffff;
+    color: #2d2238;
+    transform: translateY(-1px);
+}
+
+.brand-tag {
+    color: #f8f4f0;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    text-align: center;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Main Container & Banner */
+.container {
+    flex: 1;
+    max-width: 920px;
+    width: calc(100% - 32px);
+    margin: 26px auto 40px auto;
+    background-color: #ffffff;
+    padding: 32px;
+    border-radius: 16px;
+    border: 2px solid #a98cc3;
+    box-shadow: 0 8px 22px rgba(109, 82, 135, 0.14);
+}
+
+.page-banner {
+    background: linear-gradient(135deg, #a98cc3 0%, #9272b0 100%);
+    color: #f8f4f0;
+    padding: 24px 20px;
+    border-radius: 14px;
+    border: 2px solid #7d5d9c;
+    text-align: center;
+    margin-bottom: 24px;
+    box-shadow: 0 6px 16px rgba(109, 82, 135, 0.18);
+}
+
+.page-banner h1 {
+    font-size: 26px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.college-subtitle {
+    font-size: 14.5px;
+    color: #f8f4f0;
+}
+
+/* Section Divider */
+.section-title {
+    background: linear-gradient(90deg, #efe8f5 0%, #f8f4f0 100%);
+    color: #4a345e;
+    font-weight: bold;
+    padding: 12px 16px;
+    margin: 30px 0 18px 0;
+    border-left: 6px solid #a98cc3;
+    border-top: 1px solid #dfd3e8;
+    border-right: 1px solid #dfd3e8;
+    border-bottom: 1px solid #dfd3e8;
+    border-radius: 0 10px 10px 0;
+    font-size: 19px;
+}
+
+/* Q&A Cards */
+.qa-box {
+    margin-bottom: 18px;
+    padding: 18px 20px;
+    background: linear-gradient(180deg, #f8f4f0 0%, #ffffff 45%);
+    border: 1.5px solid #d5c4e3;
+    border-left: 5px solid #a98cc3;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(109, 82, 135, 0.07);
+}
+
+.question {
+    font-weight: bold;
+    color: #3b294d;
+    font-size: 16px;
+    line-height: 1.45;
+}
+
+.answer {
+    margin-top: 10px;
+    color: #2d2238;
+    font-size: 15px;
+}
+
+.answer strong {
+    color: #4a345e;
+}
+
+ul {
+    margin: 8px 0 4px 0;
+    padding-left: 22px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+/* Reaction & Calculation Highlight Box */
+.formula-block {
+    margin-top: 8px;
+    padding: 10px 14px;
+    background-color: #f8f4f0;
+    border: 1px dashed #a98cc3;
+    border-radius: 8px;
+    color: #2d2238;
+    font-size: 14.5px;
+    line-height: 1.6;
+    overflow-x: auto;
+}
+
+code, pre {
+    background: #f2ece6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #8e6fa9 0%, #a98cc3 100%);
+    color: #f8f4f0;
+    border-top: 2px solid #7d5d9c;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Smartphone Responsive Styles */
+@media (max-width: 600px) {
+    header {
+        padding: 10px 14px;
+    }
+
+    .nav-btn {
+        padding: 7px 12px;
+        font-size: 13px;
+    }
+
+    .brand-tag {
+        font-size: 14.5px;
+    }
+
+    .container {
+        width: calc(100% - 20px);
+        margin: 16px auto 28px auto;
+        padding: 18px 14px;
+        border-radius: 14px;
+    }
+
+    .page-banner {
+        padding: 18px 14px;
+        margin-bottom: 18px;
+    }
+
+    .page-banner h1 {
+        font-size: 20px;
+    }
+
+    .college-subtitle {
+        font-size: 13px;
+    }
+
+    .section-title {
+        font-size: 17px;
+        padding: 10px 12px;
+        margin: 22px 0 14px 0;
+    }
+
+    .qa-box {
+        padding: 14px;
+        margin-bottom: 14px;
+    }
+
+    .question {
+        font-size: 15px;
+    }
+
+    .answer {
+        font-size: 14px;
+    }
+
+    .formula-block {
+        padding: 8px 10px;
+        font-size: 13.5px;
+    }
+}

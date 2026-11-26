@@ -1,91 +1,264 @@
-*{
-    margin: 0px;
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-    border: border-box;
-
 }
-header{
-    background-color: rgb(1, 0, 2);
+
+body {
+    background-color: #f8f4f0;
+    color: #2d2238;
+    padding-top: 85px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Header */
+header {
+    background: linear-gradient(135deg, #8e6fa9 0%, #a98cc3 100%);
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 2px solid #7d5d9c;
+    box-shadow: 0 4px 14px rgba(74, 52, 94, 0.18);
+}
+
+.navbar {
+    padding: 0 20px;
     width: 100%;
 }
-.click{
-    display: block;
+
+.click {
+    display: inline-block;
     text-decoration: none;
     color: inherit;
 }
-.navbar{
-    height: 100px;
-}
-.nav-logo{
-    height: 20px;
-    width: 60px;
-   padding: 10px
-}
-.logo{
-    background-color: rgb(169, 103, 77);
-    color: rgb(249, 250, 250);
-    height: 100%;
-    width: 100%;
-    background-size: contain;
-    border: 2px solid black;
-    
-}
-button {
-    width: 100%;
-    height: 100px;
-}
-button:hover{
-    transform: scale(1.15);
-    box-shadow: 0px 4px 10px rgba(0,0, 0, 0.15);
-}
-footer {
-  text-align: center;
-  padding: 20px;
-  background-color:rgb(1, 0, 2);
-  color: white;
-  font-size: 14px;
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
 
-/* -------------------------------------------------------------------------- */
-main{ 
-    display: block;
-    background-color: rgb(207, 206, 204);
-    
+.logo {
+    background-color: #f8f4f0;
+    color: #4a345e;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 2px solid #5c4275;
+    box-shadow: 0 3px 8px rgba(45, 34, 56, 0.15);
+    transition: transform 0.2s, background-color 0.2s;
 }
-.subbox{
-    height: 350px;
-    background-color: rgb(170, 209, 243);
-    width: 500px;
-    border: 2px solid black;
-    margin-left: 250px;
-    margin-right: 250px;
-    margin-bottom: 20px;
-    border-radius: 15%;
+
+.logo:hover {
+    transform: translateY(-1px);
+    background-color: #ffffff;
+}
+
+.brand-tag {
+    color: #f8f4f0;
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 3px rgba(45, 34, 56, 0.25);
+}
+
+/* ------------------------------------------------------------------------- */
+/* Main & Cards */
+main {
+    flex: 1;
+    max-width: 1050px;
+    width: 100%;
+    margin: 25px auto 45px auto;
+    padding: 0 20px;
+}
+
+.page-banner {
+    background: linear-gradient(135deg, #a98cc3 0%, #9272b0 100%);
+    color: #f8f4f0;
+    padding: 28px 22px;
+    border-radius: 16px;
+    border: 2px solid #7d5d9c;
     text-align: center;
-
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(109, 82, 135, 0.2);
 }
-h1{
-    display: inline;
-    text-align: end;
-    
 
-
+.page-banner h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #ffffff;
+    letter-spacing: 0.5px;
 }
-button{
-    height: 150px;
-    width: 400px;
-    border-radius: 10%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
-    background-color: orange;
 
+.page-banner p {
+    font-size: 15px;
+    color: #f8f4f0;
 }
-/* --------------------------------------------------------------------------------------------------- */
 
+.cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+
+.subbox {
+    width: 315px;
+    min-height: 310px;
+    background: linear-gradient(180deg, #f8f4f0 0%, #ffffff 55%);
+    border: 2px solid #a98cc3;
+    border-top: 6px solid #7d5d9c;
+    border-radius: 18px;
+    padding: 26px 22px;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(109, 82, 135, 0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.subbox:hover {
+    transform: translateY(-5px);
+    border-color: #7d5d9c;
+    box-shadow: 0 12px 24px rgba(109, 82, 135, 0.2);
+}
+
+.card-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    background-color: #a98cc3;
+    color: #f8f4f0;
+    border: 1.5px solid #6b4d87;
+}
+
+.subbox h2 {
+    font-size: 23px;
+    color: #3b294d;
+}
+
+.subbox p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #4a3d57;
+    text-align: center;
+}
+
+.btn-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+button {
+    height: 52px;
+    width: 170px;
+    border-radius: 12px;
+    border: 2px solid #7d5d9c;
+    background-color: #a98cc3;
+    color: #f8f4f0;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(109, 82, 135, 0.18);
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background-color: #8e6fa9;
+    color: #ffffff;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Footer */
 footer {
-  text-align: center;
-  padding: 20px;
-  background-color:rgb(3, 0, 6);
-  color: white;
-  font-size: 14px;
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #7d5d9c 0%, #a98cc3 100%);
+    color: #f8f4f0;
+    border-top: 2px solid #8e6fa9;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Smartphone Responsive Styles */
+@media (max-width: 600px) {
+    body {
+        padding-top: 72px;
+    }
+
+    header {
+        height: 72px;
+    }
+
+    .logo {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+
+    .brand-tag {
+        font-size: 17px;
+    }
+
+    main {
+        margin: 18px auto 32px auto;
+        padding: 0 14px;
+    }
+
+    .page-banner {
+        padding: 22px 16px;
+        margin-bottom: 22px;
+        border-radius: 14px;
+    }
+
+    .page-banner h1 {
+        font-size: 22px;
+    }
+
+    .page-banner p {
+        font-size: 13.5px;
+    }
+
+    .subbox {
+        width: 100%;
+        max-width: 350px;
+        min-height: 255px;
+        padding: 22px 18px;
+        border-radius: 16px;
+    }
+
+    .subbox h2 {
+        font-size: 20px;
+    }
+
+    .subbox p {
+        font-size: 14px;
+    }
+
+    button {
+        height: 48px;
+        width: 155px;
+    }
 }
