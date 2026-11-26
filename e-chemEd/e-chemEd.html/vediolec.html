@@ -1,58 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="vediolec.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vedio lec</title>
+    <title>Video Lectures - E-chemEd</title>
+    <link rel="stylesheet" href="vediolec.css">
 </head>
 <body>
+
+    <!-- Header -->
     <header>
-        <a href="HomePage.html" class="click">
-
         <div class="navbar">
-            <div class="nav-logo">
-            <div class="logo" style="padding-left: 15px;">Home</div>
+            <a href="HomePage.html" class="click">
+                <div class="nav-logo">
+                    <div class="logo">Home</div>
+                    <span class="brand-tag">E-chemEd</span>
+                </div>
+            </a>
         </div>
-        </a>
-         
+    </header>
 
-    </div>
-   </header>
-   <br><br><br><br><br><br>
-
-    <!-- ------------------------------------------------------------------------------ -->
+    <!-- Main Content -->
     <main>
-        <h2>
-            <b>Vedio Lectures by Faculty</b>
-        </h2>
-        <div>
-            <form action="VIDEO-2026-09-20-20-57-06.mp4" method="get">
-                    <button type="submit">Unit 1: Water Processing and Environmental Sustainability.</button>
-                </form>
-            <br><br>
-            <form action="" method="get">
-                    <button type="submit">unit 2 : Electrochemical Energy Storage Systems</button>
-                </form>
-            <br><br>
-            <form action="" method="get">
-                    <button type="submit">unit 3 : Flexible Electronics & Optoelectronic Materials</button>
-                </form>
-            <br><br>
-            <form action="" method="get">
-                    <button type="submit">unit 4 : Nanomaterials,Electrochemistry And Thermal Analysis</button>
-                </form>
-            <br><br>
-            <form action="" method="get">
-                    <button type="submit">unit 5 :Energy Generation And Sustainable Fuels</button>
-                </form>
-            <br><br>
+        <div class="page-header">
+            <h1>Video Lectures by Faculty</h1>
+            <p>Select a chemistry unit below to watch recorded faculty lectures.</p>
         </div>
 
+        <div class="units-list">
+            <form action="VIDEO-2026-09-20-20-57-06.mp4" method="get" class="unit-form">
+                <button type="submit" class="unit-btn">
+                    <span class="unit-badge">UNIT 1</span>
+                    <span class="unit-title">Water Processing and Environmental Sustainability.</span>
+                </button>
+            </form>
+
+            <form action="" method="get" class="unit-form">
+                <button type="submit" class="unit-btn">
+                    <span class="unit-badge">UNIT 2</span>
+                    <span class="unit-title">Electrochemical Energy Storage Systems</span>
+                </button>
+            </form>
+
+            <form action="" method="get" class="unit-form">
+                <button type="submit" class="unit-btn">
+                    <span class="unit-badge">UNIT 3</span>
+                    <span class="unit-title">Flexible Electronics &amp; Optoelectronic Materials</span>
+                </button>
+            </form>
+
+            <form action="" method="get" class="unit-form">
+                <button type="submit" class="unit-btn">
+                    <span class="unit-badge">UNIT 4</span>
+                    <span class="unit-title">Nanomaterials, Electrochemistry And Thermal Analysis</span>
+                </button>
+            </form>
+
+            <form action="" method="get" class="unit-form">
+                <button type="submit" class="unit-btn">
+                    <span class="unit-badge">UNIT 5</span>
+                    <span class="unit-title">Energy Generation And Sustainable Fuels</span>
+                </button>
+            </form>
+        </div>
     </main>
 
+    <!-- Footer -->
     <footer>
-    <p>&copy; 2026 e-chemEd. All rights reserved.</p>
-  </footer>
+        <p>&copy; 2026 E-chemEd. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
