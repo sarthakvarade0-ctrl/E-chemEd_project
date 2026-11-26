@@ -1,155 +1,360 @@
-/* header */
-*{
-    margin: 0px;
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-    border: border-box;
-    
-
 }
-header{
-    
-    background-color: dodgerblue;
-    position: fixed;
-    width: 100%;
+
+body {
+    background-color: #f8f4f0;
+    color: #2d2238;
+    padding-top: 90px;
+    min-height: 100vh;
     display: flex;
-    
-}
-.add-box{
-    text-align: center;
-    padding-top: 60px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    height: 150px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0,0.9);
-    background-color: dodgerblue;
-    color: white;
+    flex-direction: column;
 }
 
-.logo{
-    height:70px;
-    width:70px ;
-    border-radius: 50%;
-    background-image: url(logo.jpg);
-    background-size: contain;
-    display: inline-block;
-}
-
-.navbar{
-    height: px;
-    padding: 20px;
-}
-.sitename{
-    
-    background-size: contain;
-    height: 50px;
-    font-size: 50px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    color: white;
-    font-family: arial rounded mt bold;
-    display: inline-block;
-    vertical-align: top;
-}
-
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------- */
-
-
-/* section feature */
-
-#main{
-    background-color: #f6f6f7;
-    text-align: center;
-    
-}
-section{
-    background-color: #d2d2d2;
-    display: inline-block;
-    padding: 20px;
+/* ------------------------------------------------------------------------- */
+/* Header */
+header {
+    background: linear-gradient(135deg, #8e6fa9 0%, #a98cc3 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    
-   
+    height: 90px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 14px rgba(74, 52, 94, 0.18);
+    border-bottom: 2px solid #8e6fa9;
 }
-h2{
-    display: inline;
 
+.navbar {
+    padding: 0 20px;
+    width: 100%;
 }
-.text{
-    margin: 2px;
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
-#mindmapbody{
-    display: inline-block;
+
+.logo {
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    background-color: #f8f4f0;
+    background-image: url(logo.jpg);
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #f8f4f0;
+    box-shadow: 0 3px 8px rgba(45, 34, 56, 0.2);
+    flex-shrink: 0;
+}
+
+.sitename {
+    font-size: 42px;
+    text-shadow: 2px 2px 5px rgba(45, 34, 56, 0.28);
+    color: #f8f4f0;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Hero / Add Box */
+.add-box {
+    text-align: center;
+    padding: 45px 20px;
+    margin: 20px auto;
+    max-width: 1050px;
+    width: calc(100% - 40px);
+    min-height: 200px;
+    border-radius: 16px;
+    border: 2px solid #8e6fa9;
+    box-shadow: 0 8px 22px rgba(109, 82, 135, 0.2);
+    background: linear-gradient(135deg, #a98cc3 0%, #9272b0 100%);
+    color: #f8f4f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+}
+
+.add-box h1 {
+    font-size: 28px;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(45, 34, 56, 0.2);
+}
+
+.add-box p {
+    font-size: 16px;
+    color: #f8f4f0;
+    max-width: 650px;
+    line-height: 1.45;
+}
+
+.hero-btn {
+    background-color: #f8f4f0;
+    height: 50px;
+    width: 170px;
+    margin-top: 8px;
+    border: 2px solid #5c4275;
+    border-radius: 12px;
+    color: #4a345e;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(45, 34, 56, 0.18);
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.hero-btn:hover {
+    background-color: #ffffff;
+    color: #2d2238;
+    transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------------------------- */
+/* Main & Sections */
+#main {
+    flex: 1;
+    background-color: #f8f4f0;
+    text-align: center;
+}
+
+#features {
+    background-color: #f2ece6;
+    border-top: 2px solid #e2d5e8;
+    border-bottom: 2px solid #e2d5e8;
+    padding: 45px 20px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#faculty {
+    background-color: #f8f4f0;
+    padding: 40px 20px 50px 20px;
+    width: 100%;
+}
+
+section h1 {
+    margin-bottom: 28px;
+    font-size: 28px;
+    color: #4a345e;
+    letter-spacing: 1px;
+}
+
+/* Feature Cards Grid */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.feature-card {
     width: 300px;
-    height: 300px;
+    min-height: 285px;
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
-    border: 2px,solid,black;
-    background:  #CAF0F8;
-    padding: 20px;
-
+    box-shadow: 0 6px 16px rgba(109, 82, 135, 0.12);
+    border: 2px solid #a98cc3;
+    background: linear-gradient(180deg, #f8f4f0 0%, #ffffff 55%);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
 
-
-button{
-    height: 100PX;
-    width: 150PX;
-    margin-top: 20PX;
-    border-radius: 10%;
-    background-color:#FBB02D;
-    color: white;
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: #7d5d9c;
+    box-shadow: 0 12px 24px rgba(109, 82, 135, 0.2);
 }
-#quizzbody{
+
+.card-tag {
     display: inline-block;
-    width: 300pxpx;
-    height: 300px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
-    border: 2px,solid,black;
-    background:#CAF0F8 ;
-    padding: 20px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    background-color: #a98cc3;
+    color: #f8f4f0;
+    border: 1px solid #7d5d9c;
 }
-#attendance{
-    display: inline-block;
-    width: 300px;
-    height: 300px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
-    border: 2px,solid,black;
-    background: #CAF0F8;
-    padding: 20px;
-}
-#other{
-    display: inline-block;
-    width: 300px;
-    height: 300px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
-    border: 2px,solid,black;
-    background: #CAF0F8;
-    padding: 20px;
 
+.feature-card h2 {
+    font-size: 21px;
+    color: #3b294d;
+    margin-top: 6px;
 }
-/* ------------------------------------------------------------------------------------------- */
 
-/* section faculty */
-.photo{
-    background-color: beige;
+.text {
+    margin: 5px 0;
+    line-height: 1.45;
+    color: #4a3d57;
+}
+
+button {
+    height: 54px;
+    width: 155px;
+    margin-top: 14px;
+    border-radius: 12px;
+    border: 2px solid #7d5d9c;
+    background-color: #a98cc3;
+    color: #f8f4f0;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(109, 82, 135, 0.18);
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+
+button:hover {
+    background-color: #8e6fa9;
+    color: #ffffff;
+    transform: scale(1.04);
+}
+
+/* ------------------------------------------------------------------------- */
+/* Faculty Section */
+#photobox {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px 25px;
+    background: linear-gradient(180deg, #f8f4f0 0%, #ffffff 45%);
+    border-radius: 16px;
+    border: 2px solid #a98cc3;
+    box-shadow: 0 8px 20px rgba(109, 82, 135, 0.14);
+}
+
+.photo {
+    background-color: #f8f4f0;
     width: 200px;
     height: 250px;
     background-image: url(chinemam.jpg);
     background-size: cover;
-    border: 2px,solid,black;
-    margin: 0 auto;
-    
+    background-position: center;
+    border: 3px solid #a98cc3;
+    border-radius: 12px;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 4px 10px rgba(45, 34, 56, 0.12);
 }
 
-/* ------------------------------------------------------------------------------------------------------------------------------------ */
+.faculty-name {
+    font-size: 21px;
+    color: #4a345e;
+    margin-bottom: 12px;
+}
 
+.faculty-details p {
+    margin: 6px 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #3b2f47;
+}
+
+.read-more {
+    margin-top: 20px;
+}
+
+.read-more a {
+    display: inline-block;
+    padding: 11px 24px;
+    background-color: #a98cc3;
+    color: #f8f4f0;
+    border: 2px solid #7d5d9c;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(109, 82, 135, 0.18);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.read-more a:hover {
+    background-color: #8e6fa9;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------------------------- */
 /* Footer */
 footer {
-  text-align: center;
-  padding: 20px;
-  background-color:rgb(3, 0, 6);
-  color: white;
-  font-size: 14px;
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #8e6fa9 0%, #a98cc3 100%);
+    color: #f8f4f0;
+    font-size: 14px;
+    font-weight: bold;
+    border-top: 2px solid #7d5d9c;
+    margin-top: auto;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Smartphone Responsive Styles */
+@media (max-width: 600px) {
+    body {
+        padding-top: 75px;
+    }
+
+    header {
+        height: 75px;
+    }
+
+    .logo {
+        height: 50px;
+        width: 50px;
+    }
+
+    .sitename {
+        font-size: 28px;
+    }
+
+    .add-box {
+        padding: 30px 15px;
+        margin: 15px 10px;
+        width: calc(100% - 20px);
+        border-radius: 14px;
+    }
+
+    .add-box h1 {
+        font-size: 21px;
+    }
+
+    .add-box p {
+        font-size: 14px;
+    }
+
+    #features, #faculty {
+        padding: 30px 15px;
+    }
+
+    section h1 {
+        font-size: 24px;
+    }
+
+    .feature-card {
+        width: 100%;
+        max-width: 340px;
+        min-height: 240px;
+    }
+
+    button {
+        height: 50px;
+        width: 145px;
+    }
+
+    .photo {
+        width: 170px;
+        height: 215px;
+    }
 }
